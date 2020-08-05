@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    <h2 class="test">Create Listing</h2>
     <form action="{% url 'create' %}" method="POST">
         {% csrf_token %}
         <div class="row center">
@@ -26,6 +27,12 @@
             <div class="form-group col-12">
                 <label for="description">Description</label>
                 <textarea class="form-control" id="description" rows="5" name="description" placeholder="Maximun of 256 characters"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-12">
+                <label for="image">Image URL</label>
+                <input type="text" class="form-control" id="image" name="image">
             </div>
         </div>
         <div class="row">

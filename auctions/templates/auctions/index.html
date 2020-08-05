@@ -5,6 +5,31 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Active Listings</h2>
-    TODO
+    <h2 class="test">Active Listings</h2>
+    {% for lists in listings %}
+    <div class="container-fluid listing">
+        <div class="container-fluid row">
+            <div class="col-4 listing-image">
+                <img class="image" src="{{lists.image}}">
+            </div>
+            <div class="col-4 listing-info">
+                <h3 class="listing-text">
+                    <b>{{ lists.title }}</b>
+                </h3>
+                <h5 class="listing-text">
+                    <b>Price: </b>${{ lists.bid }}
+                </h5>
+                <br>
+                <h5 class="listing-text">
+                    {{ lists.description }}
+                </h5>
+                <br>
+                <h6 class="listing-date">
+                    Created {{ lists.time }}
+                </h6>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <hr>
 {% endblock %}
