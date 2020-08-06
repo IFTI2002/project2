@@ -15,6 +15,9 @@ def index(request):
         "listings": listing
     })
 
+def listing(request):
+    return render(request, "auctions/listing.html")
+
 @login_required(login_url='login')
 def watchlist(request):
     return render(request, "auctions/watchlist.html")

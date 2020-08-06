@@ -33,3 +33,7 @@ body {
 .listing-date {
     color: gray;
 }
+
+.listing-link:link , .listing-link:visited, .listing-link:hover, .listing-link:active{
+    color: black;
+}
