@@ -1,9 +1,39 @@
 {% extends "auctions/layout.html" %}
 
 {% block title %}
-    {{ listing.title }}
+    {{ listings.title }}
 {% endblock %}
 
 {% block body %}
-    
+<div class="list-text">
+    <h2>
+        <b>Listing: {{ listings.title }}</b>
+    </h2>
+</div>
+<div class="container-fluid list">
+    <div>
+        <div class="list-image">
+            <img class="image-list" src="{{ listings.image }}">
+        </div>
+    </div>
+</div>
+<div class="list-info">
+    <div>
+        <h5>{{ listings.description }}</h5>
+    </div>
+    <div>
+        <h4 class="listing-text">
+            <b>$ {{ listings.bid }}</b>
+        </h4>
+    </div>
+    <form action="{% url 'listing' listings.id%}" method="POST"> 
+        {% csrf_token %}
+        <div class="row">
+            <div class="form-group col-12">
+                <input class="place-bid" type="number" min="0" max="999999" name="place_bid" placeholder="Bid">
+            </div>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Place Bid">
+    </form>
+</div>
 {% endblock %}

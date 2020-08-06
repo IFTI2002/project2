@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h2 class="test">Active Listings</h2>
+    <h2>Active Listings</h2>
     {% for lists in listings %}
     <div class="container-fluid listing">
         <div class="container-fluid row">
@@ -14,12 +14,12 @@
             </div>
             <div class="col-4 listing-info">
                 <h3 class="listing-text">
-                    <a class="listing-link" href="{% url 'listing' %}">
+                    <a class="listing-link" href="{% url 'listing' lists.id %}">
                         <b>{{ lists.title }}</b>
                     </a>
                 </h3>
                 <h5 class="listing-text">
-                    <b>Price: </b>${{ lists.bid }}
+                    <b>Price:</b> ${{ lists.bid }}
                 </h5>
                 <br>
                 <h5 class="listing-text">

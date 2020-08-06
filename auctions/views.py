@@ -10,13 +10,15 @@ from .models import User, Listings
 def index(request):
 
     listing = Listings.objects.all()
-
     return render(request, "auctions/index.html", {
         "listings": listing
     })
 
-def listing(request):
-    return render(request, "auctions/listing.html")
+def listing(request, list_id):
+    listing = Listings.objects.get(id=list_id)
+    return render(request, "auctions/listing.html", {
+        "listings": listing
+    })
 
 @login_required(login_url='login')
 def watchlist(request):

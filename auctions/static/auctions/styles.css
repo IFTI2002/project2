@@ -7,12 +7,40 @@ body {
     margin-right: 20px;
 }
 
-.image{
+.list-info {
+    margin: 20px 0;
+}
+
+.place-bid {
+    width: 100%;
+    border-style: solid;
+    border-color: lightgray;
+    height: 40px;
+}
+
+.image {
     max-width: 100%;
     height: auto;
     padding: 50px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.image-list {
+    max-width: 100%;
+    height: 400px;
+    padding: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.list-image {
+    height: 400px;
+}
+
+.list {
+    height: 400px;
+    max-width: 100%;
 }
 
 .listing {
@@ -36,4 +64,8 @@ body {
 
 .listing-link:link , .listing-link:visited, .listing-link:hover, .listing-link:active{
     color: black;
+}
+
+.list-text {
+    margin: 1% 0;
 }
