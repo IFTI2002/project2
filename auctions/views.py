@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, Listings
+from .models import User, Listings, Categories, Bids, Comments
 
 def index(request):
 
@@ -19,7 +19,7 @@ def listing(request, list_id):
     })
 
 def categories(request):
-    return
+    return register(request, "auctions/categories.html")
 
 @login_required(login_url='login')
 def watchlist(request):
@@ -35,15 +35,16 @@ def create(request):
             title=request.POST["title"], 
             bid=request.POST["starting_bid"],
             description=request.POST["description"], 
-            image=request.POST["image"])
+            image=request.POST["image"],
+            categories=request.POST["category"])
 
         lists.save()
 
         return HttpResponseRedirect(reverse("index"))
 
-    return render(request, "auctions/create.html")
-
-
+    return render(request, "auctions/create.html", {
+        "categories": Categories.objects.all()
+    })
 
 def login_view(request):
     if request.method == "POST":
