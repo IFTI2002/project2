@@ -48,6 +48,7 @@ body {
     border-style: solid;
     border-color: lightgray;
     height: 400px;
+    margin-bottom: 20px;
 }
 
 .listing-info {

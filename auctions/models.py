@@ -4,6 +4,11 @@ from django.db import models
 class User(AbstractUser):
     pass
 
+class Price(models.Models):
+    starting_bid = models.IntegerField()
+    current_bid = models.IntegerField()
+    bid_count = models.IntergerField()
+
 class Listings(models.Model):
     title = models.CharField(max_length=32)
     description = models.CharField(max_length=256)
@@ -12,4 +17,4 @@ class Listings(models.Model):
     image = models.CharField(max_length=2048, null=True)
 
     def __str__(self):
-        return f"{self.title}: {self.bid}"
+        return f"{self.id} {self.title}: ${self.bid} {self.description}"

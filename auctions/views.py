@@ -9,16 +9,17 @@ from .models import User, Listings
 
 def index(request):
 
-    listing = Listings.objects.all()
     return render(request, "auctions/index.html", {
-        "listings": listing
+        "listings": Listings.objects.all()
     })
 
 def listing(request, list_id):
-    listing = Listings.objects.get(id=list_id)
     return render(request, "auctions/listing.html", {
-        "listings": listing
+        "listings": Listings.objects.get(id=list_id)
     })
+
+def categories(request):
+    return
 
 @login_required(login_url='login')
 def watchlist(request):
@@ -42,8 +43,7 @@ def create(request):
 
     return render(request, "auctions/create.html")
 
-def categories(request):
-    return
+
 
 def login_view(request):
     if request.method == "POST":
