@@ -5,13 +5,38 @@
 {% endblock %}
 
 {% block body %}
-    <h2> Watchlist </h2>
+    <h2>Watchlist</h2>
     <hr>
-    {% for None in None %}
+    {% for lists in watchlist %}
+    <div class="container-fluid listing1">
+        <div class="container-fluid row">
+            <div class="col-4 listing-image">
+                <img class="image" src="{{lists.image}}">
+            </div>
+            <div class="col-4 listing-info">
+                <h3 class="listing-text">
+                    <a class="listing-link" href="{% url 'listing' lists.id %}">
+                        <b>{{ lists.title }}</b>
+                    </a>
+                </h3>
+                <h5 class="listing-text">
+                    <b>Price:</b> ${{ lists.bid }}
+                </h5>
+                <br>
+                <h5 class="listing-text">
+                    {{ lists.description }}
+                </h5>
+                <br>
+                <h6 class="listing-date">
+                    Created {{ lists.time }}
+                </h6>
+            </div>
+        </div>
+    </div>
 
     {% empty %}
 
-        <h3>You haven't added any Listings</h3>
+    <h3>You haven't added any list<h3>
 
     {% endfor %}
     <hr>

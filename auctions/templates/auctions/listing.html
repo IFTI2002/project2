@@ -36,6 +36,7 @@
         </div>
         <input type="number" hidden name="user_id" value="{{ user.id }}">
         <input class="btn btn-primary" type="submit" value="Place Bid">
+    </form>
     <hr>
     <div>
         <h2> Details </h2>
@@ -45,9 +46,18 @@
     </div>
     <hr>
     {% if users.username == user.username %}
-        <input type="number" hidden name="delete_list" value="delete">
-        <input class="btn btn-primary" type="submit" value="Close Listing">
+        <form action="{% url 'close' %}" method="POST"> 
+            {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="Close Listing">
+        </form>
+    {% else %}
+        <form action="{% url 'watchlist' %}" method="POST"> 
+            {% csrf_token %}
+            <input hidden type="number" name="listings_id" value="{{ listings.id }}">
+            <input hidden type="number" name="user_id" value="{{ user.id }}">
+            <input class="btn btn-primary" type="submit" value="Watchlist">
+        </form>
     {% endif %}
-    </form>
+    
 </div>
 {% endblock %}

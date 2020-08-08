@@ -26,6 +26,7 @@ class Listings(models.Model):
 
 class Watchlist(models.Model):
     watchlist = models.IntegerField()
+    user = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.watchlist
+        return f"{self.watchlist}:{self.user}" 

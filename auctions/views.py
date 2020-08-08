@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, Listings, Categories
+from .models import User, Listings, Categories, Watchlist
 
 def index(request):
 
@@ -43,10 +43,26 @@ def category(request, category_id):
         "categories": category
     })
 
+def close(request):
+    return render(request, "auctions/close.html")
+
 @login_required(login_url='login')
 def watchlist(request):
-    return render(request, "auctions/watchlist.html")
 
+    if request.method == "POST":
+        
+        watchlist = Watchlist(
+            watchlist = request.POST["listings_id"],
+            user = request.POST["user_id"]
+        )
+
+        watchlist.save()
+
+        return HttpResponseRedirect(reverse("watchlist"))
+
+    return render(request, "auctions/watchlist.html", {
+        "watchlist": Watchlist.objects.filter(user=user_id)
+    })
 
 @login_required(login_url='login')
 def create(request):
