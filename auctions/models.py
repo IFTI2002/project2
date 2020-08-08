@@ -12,7 +12,7 @@ class Categories(models.Model):
 
 class Listings(models.Model):
     title = models.CharField(max_length=32)
-    description = models.CharField(max_length=256)
+    description = models.CharField(max_length=256, null=True)
     time = models.DateTimeField(auto_now_add=True, null=True)
     image = models.CharField(max_length=2048, null=True)
     bid = models.IntegerField()

@@ -19,7 +19,10 @@ def listing(request, list_id):
     })
 
 def categories(request):
-    return render(request, "auctions/categories.html")
+    category = Categories.objects.all()
+    return render(request, "auctions/categories.html", {
+        "categories": category
+    })
 
 @login_required(login_url='login')
 def watchlist(request):
@@ -29,21 +32,22 @@ def watchlist(request):
 @login_required(login_url='login')
 def create(request):
 
-    if request.method == "POST":
+    if request.method == "POST": 
 
         lists = Listings(
             title=request.POST["title"], 
             bid=request.POST["starting_bid"],
             description=request.POST["description"], 
             image=request.POST["image"],
-            categories=request.POST["category"])
-
+            categories=Categories.objects.get(category=request.POST["category"]))
+            
         lists.save()
 
         return HttpResponseRedirect(reverse("index"))
 
+    category = Categories.objects.all()
     return render(request, "auctions/create.html", {
-        "categories": Listings.objects.all()
+        "categories": category
     })
 
 def login_view(request):
