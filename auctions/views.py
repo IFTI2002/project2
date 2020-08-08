@@ -14,8 +14,18 @@ def index(request):
     })
 
 def listing(request, list_id):
-    return render(request, "auctions/listing.html", {
+
+    if request.method == "POST":
+
+        Listings.objects.filter(pk=list_id).update(bid=request.POST["place_bid"])
+
+        return render(request, "auctions/listing.html", {
         "listings": Listings.objects.get(id=list_id)
+    })
+    lists = Listings.objects.get(id=list_id)
+    return render(request, "auctions/listing.html", {
+        "listings": lists,
+        "users": User.objects.get(id=lists.user)
     })
 
 def categories(request):
@@ -45,7 +55,9 @@ def create(request):
             bid=request.POST["starting_bid"],
             description=request.POST["description"], 
             image=request.POST["image"],
-            categories=Categories.objects.get(category=request.POST["category"]))
+            categories=Categories.objects.get(category=request.POST["category"]),
+            user=request.POST["user_id"]
+            )
             
         lists.save()
 

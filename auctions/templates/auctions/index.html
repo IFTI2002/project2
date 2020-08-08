@@ -6,11 +6,12 @@
 
 {% block body %}
     <h2>Active Listings</h2>
+    <hr>
     {% for lists in listings %}
     <div class="container-fluid listing">
         <div class="container-fluid row">
             <div class="col-4 listing-image">
-                <img class="image" src="{{lists.image}}">
+                <img class="image" src="{{lists.image}}" width="550" height="400">
             </div>
             <div class="col-4 listing-info">
                 <h3 class="listing-text">
@@ -19,7 +20,10 @@
                     </a>
                 </h3>
                 <h5 class="listing-text">
-                    <b>Price:</b> ${{ lists.bid }}
+                    {{ lists.categories }}
+                </h5>
+                <h5 class="listing-text">
+                    <b>Current Bid:</b> ${{ lists.bid }}
                 </h5>
                 <br>
                 <h5 class="listing-text">
@@ -27,7 +31,7 @@
                 </h5>
                 <br>
                 <h6 class="listing-date">
-                    Created {{ lists.time }}
+                    Created on {{ lists.time }}
                 </h6>
             </div>
         </div>
@@ -35,7 +39,7 @@
 
     {% empty %}
 
-    <h3>No Listings Available </h3>
+    <h3> No Listings Available </h3>
 
     {% endfor %}
     <hr>

@@ -6,6 +6,7 @@
 
 {% block body %}
     <h2>Create Listing</h2>
+    <hr>
     <form action="{% url 'create' %}" method="POST">
         {% csrf_token %}
         <div class="row center">
@@ -41,6 +42,8 @@
                 <input type="number" id="starting_bid" min="0" max="999999" placeholder="USD" name="starting_bid"> 
             </div>
         </div>
+        <hr>
+        <input type="number" hidden name="user_id" value="{{ user.id }}">
         <input class="btn btn-primary" type="submit" value="Submit Listing">
     </form>
 {% endblock %}
