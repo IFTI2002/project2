@@ -4,20 +4,11 @@ from django.db import models
 class User(AbstractUser):
     pass
 
-class Comments(models.Model):
-    comment = models.CharField(max_length=256)
-
-    def __str__(self):
-        return self.comment
-
 class Categories(models.Model):
     category = models.CharField(max_length=32)
 
     def __str__(self):
-        return self.Categories
-
-class Bids(models.Model):
-    bids = models.IntegerField()
+        return self.category
 
 class Listings(models.Model):
     title = models.CharField(max_length=32)
@@ -26,7 +17,7 @@ class Listings(models.Model):
     image = models.CharField(max_length=2048, null=True)
     bid = models.IntegerField()
     categories = models.ForeignKey(Categories, on_delete=models.CASCADE, related_name="type")
-    comment = models.ForeignKey(Comments, on_delete=models.CASCADE, related_name="commentations", null=True, blank=True)
+    comment = models.CharField(max_length=256, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.id} {self.title}: ${self.bid} {self.description}"
+        return f"{self.id} - {self.title}: ${self.bid} ({self.categories}) {self.time}"
