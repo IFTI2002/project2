@@ -33,12 +33,15 @@
                 <input class="place-bid" type="number" min="{{ listings.bid }}" max="999999" name="place_bid" placeholder="Bid">
             </div>
         </div>
+        <input type="number" hidden name="user_id" value="{{ user.id }}">
         <input class="btn btn-primary" type="submit" value="Place Bid">
     </form>
     <hr>
     <div>
         <h2> Details </h2>
-        <li> Listed by {{ users.username }} </li>
+        <li> Listed by: {{ users.username }} </li>
+        <li> Created on: {{ listings.time }} </li>
+        <li> Current Bidder: {{ bidder.username }} </li>
     </div>
 </div>
 {% endblock %}

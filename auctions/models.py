@@ -18,7 +18,8 @@ class Listings(models.Model):
     bid = models.IntegerField()
     categories = models.ForeignKey(Categories, on_delete=models.CASCADE, related_name="type")
     comment = models.CharField(max_length=256, null=True, blank=True)
-    user = models.IntegerField()
+    creator = models.IntegerField()
+    bidder = models.IntegerField()
 
     def __str__(self):
         return f"{self.id} - {self.title}: ${self.bid} ({self.categories}) {self.time}"

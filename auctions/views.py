@@ -13,19 +13,22 @@ def index(request):
         "listings": Listings.objects.all()
     })
 
+@login_required(login_url='login')
 def listing(request, list_id):
 
     if request.method == "POST":
 
         Listings.objects.filter(pk=list_id).update(bid=request.POST["place_bid"])
+        Listings.objects.filter(pk=list_id).update(bidder=request.POST["user_id"])
 
-        return render(request, "auctions/listing.html", {
-        "listings": Listings.objects.get(id=list_id)
-    })
+        HttpResponseRedirect(reverse("listing", args=(list_id,)))
+
     lists = Listings.objects.get(id=list_id)
+    
     return render(request, "auctions/listing.html", {
         "listings": lists,
-        "users": User.objects.get(id=lists.user)
+        "users": User.objects.get(id=lists.creator),
+        "bidder": User.objects.get(id=lists.bidder)
     })
 
 def categories(request):
@@ -55,8 +58,9 @@ def create(request):
             bid=request.POST["starting_bid"],
             description=request.POST["description"], 
             image=request.POST["image"],
-            categories=Categories.objects.get(category=request.POST["category"]),
-            user=request.POST["user_id"]
+            creator=request.POST["user_id"],
+            bidder=request.POST["user_id"],
+            categories=Categories.objects.get(category=request.POST["category"])
             )
             
         lists.save()
