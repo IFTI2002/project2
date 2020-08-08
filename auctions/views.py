@@ -24,6 +24,12 @@ def categories(request):
         "categories": category
     })
 
+def category(request, category_id):
+    category = Listings.objects.filter(categories=category_id)
+    return render(request, "auctions/categories.html", {
+        "categories": category
+    })
+
 @login_required(login_url='login')
 def watchlist(request):
     return render(request, "auctions/watchlist.html")
