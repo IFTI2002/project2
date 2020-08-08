@@ -21,6 +21,7 @@
     <div>
         <h5>{{ listings.description }}</h5>
     </div>
+    <hr>
     <div>
         <h4 class="listing-text">
             <b>Current Bid: $ {{ listings.bid }}</b>
@@ -35,7 +36,6 @@
         </div>
         <input type="number" hidden name="user_id" value="{{ user.id }}">
         <input class="btn btn-primary" type="submit" value="Place Bid">
-    </form>
     <hr>
     <div>
         <h2> Details </h2>
@@ -43,5 +43,11 @@
         <li> Created on: {{ listings.time }} </li>
         <li> Current Bidder: {{ bidder.username }} </li>
     </div>
+    <hr>
+    {% if users.username == user.username %}
+        <input type="number" hidden name="delete_list" value="delete">
+        <input class="btn btn-primary" type="submit" value="Close Listing">
+    {% endif %}
+    </form>
 </div>
 {% endblock %}
