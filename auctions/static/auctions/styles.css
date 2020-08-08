@@ -51,6 +51,14 @@ body {
     margin-bottom: 20px;
 }
 
+.listing1 {
+    border: 1px;
+    border-style: solid;
+    border-color: lightgray;
+    height: 400px;
+    margin-bottom: 20px;
+}
+
 .listing-info {
     padding: 30px;
 }
