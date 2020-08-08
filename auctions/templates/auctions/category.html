@@ -6,7 +6,6 @@
 
 {% block body %}
     <h2>{{ categories.first.categories }}</h2>
-    
     {% for lists in categories %}
     <div class="container-fluid listing">
         <div class="container-fluid row">
@@ -33,5 +32,11 @@
             </div>
         </div>
     </div>
+
+    {% empty %}
+
+    <h3>No Listings Available<h3>
+
     {% endfor %}
+    <hr>
 {% endblock %}
