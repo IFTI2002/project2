@@ -7,11 +7,11 @@
 {% block body %}
     <h2>Watchlist</h2>
     <hr>
-    {% for watch in watchlist %}
+    {% for watch in watchlist %} <!-- LOOP DATA ON WATCHLIST -->
 
         {% for lists in listings %}
         
-            {% if lists.id == watch.watchlist %}
+            {% if lists.id == watch.watchlist %} <!-- IF THIS LIST IS EQUAL TO THE WATCHLIST -->
                 <div class="container-fluid listing1">
                     <div class="container-fluid row">
                         <div class="col-4 listing-image">
@@ -41,7 +41,7 @@
 
         {% endfor %}
 
-    {% empty %}
+    {% empty %} <!--NOTHING ON THE LIST -->
 
         <h3>You haven't added any list<h3>
 

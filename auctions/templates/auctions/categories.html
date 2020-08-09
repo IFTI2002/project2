@@ -7,7 +7,7 @@
 {% block body %}
     <h2>All Categories</h2>
     <hr>
-    {% for category in categories %}
+    {% for category in categories %} <!--LOOP ALL CATEGORIES-->
         <li><a href="{% url 'category' category.id %}">{{ category }}</a></li>
     {% endfor %}
     <hr>
