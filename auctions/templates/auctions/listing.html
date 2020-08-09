@@ -31,7 +31,7 @@
         {% csrf_token %}
         <div class="row">
             <div class="form-group col-12">
-                <input class="place-bid" type="number" min="{{ listings.bid }}" max="999999" name="place_bid" placeholder="Bid">
+                <input class="place-bid" type="number" min="{{ min }}" max="999999" name="place_bid" placeholder="Bid">
             </div>
         </div>
         <input type="number" hidden name="user_id" value="{{ user.id }}">

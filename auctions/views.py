@@ -28,7 +28,8 @@ def listing(request, list_id):
     return render(request, "auctions/listing.html", {
         "listings": lists,
         "users": User.objects.get(id=lists.creator),
-        "bidder": User.objects.get(id=lists.bidder)
+        "bidder": User.objects.get(id=lists.bidder),
+        "min": lists.bid + 1
     })
 
 def categories(request):
@@ -52,7 +53,7 @@ def close(request):
         delete.delete()
 
         return HttpResponseRedirect(reverse("index"))
-        
+
 
 @login_required(login_url='login')
 def watchlist(request):
