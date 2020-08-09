@@ -1,0 +1,44 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    Closed Listings
+{% endblock %}
+
+{% block body %}
+    <div>
+        <div class="background1 padding">
+            <h2>Closed Listings</h2>
+        </div>
+        <hr>
+        {% for lists in listings %}
+        <div class="container-fluid listing">
+            <div class="container-fluid row">
+                <div class="col-4 listing-image">
+                    <img class="image" src="{{lists.image}}" width="550" height="400">
+                </div>
+                <div class="col-4 listing-info">
+                    <h3 class="listing-text">
+                            <b>{{ lists.title }}</b>
+                    </h3>
+                    <h5 class="listing-text">
+                        <b>Highest Bidder:</b>
+                    </h5>
+                    <br>
+                    <h5 class="listing-text">
+                        {{ lists.description }}
+                    </h5>
+                    <br>
+                    <h6 class="listing-date">
+                        Created on {{ lists.time }}
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <hr>
+        {% empty %}
+        <div class="background padding">
+            <h3> No Listings Available </h3>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

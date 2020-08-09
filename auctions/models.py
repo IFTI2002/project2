@@ -27,6 +27,7 @@ class Listings(models.Model):
     categories = models.ForeignKey(Categories, on_delete=models.CASCADE, related_name="type") # CATEGORIES
     creator = models.IntegerField() # CREATOR OF THE LISTING
     bidder = models.IntegerField() # CURRENT HIGHEST BIDDER
+    close = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.id} - {self.title}: ${self.bid} ({self.categories}) {self.time} {self.comment}"

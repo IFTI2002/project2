@@ -11,7 +11,7 @@ from .models import User, Listings, Categories, Watchlist, Comment
 def index(request):
 
     return render(request, "auctions/index.html", {
-        "listings": Listings.objects.all() # RETURN ALL ACTIVE LISTINGS
+        "listings": Listings.objects.filter(close=False) # RETURN ALL ACTIVE LISTINGS
     })
 
 # LISTING PAGE
@@ -25,7 +25,7 @@ def listing(request, list_id):
 
         return HttpResponseRedirect(reverse("listing", args=(list_id,))) # REDIRECT TO LISTINGS WITH ARGS LISTING ID
 
-    lists = Listings.objects.get(id=list_id)
+    lists = Listings.objects.get(id=list_id, close=False)
     
     return render(request, "auctions/listing.html", {
         "listings": lists,
@@ -68,10 +68,15 @@ def category(request, category_id):
 # CLOSE LISTING PAGE
 def close(request):
 
-    close = Listings.objects.filter(id=request.POST["listings_id"]) #FILTER IF EQUAL TO ID LISTING
-    close.delete() # DELETE LISTING
+    if request.method == "POST":
 
-    return HttpResponseRedirect(reverse("index"))
+        Listings.objects.filter(id=request.POST["listings_id"]).update(close=True)
+
+        return HttpResponseRedirect(reverse("close"))
+
+    return render(request, "auctions/close.html", {
+        "listings": Listings.objects.filter(close=True)
+    })
 
 # REMOVE WATCHLIST
 def remove(request):
@@ -98,7 +103,7 @@ def watchlist(request):
 
     return render(request, "auctions/watchlist.html", {
         "watchlist": Watchlist.objects.filter(user=request.user.id),
-        "listings": Listings.objects.all()
+        "listings": Listings.objects.filter(close=False)
     })
 
 # CREATEPAGE
@@ -121,9 +126,8 @@ def create(request):
 
         return HttpResponseRedirect(reverse("index")) # REDIRECT TO INDEX
 
-    category = Categories.objects.all()
     return render(request, "auctions/create.html", {
-        "categories": category # RETURN ALL CATEGORIES
+        "categories": Categories.objects.filter() # RETURN ALL CATEGORIES
     })
 
 
