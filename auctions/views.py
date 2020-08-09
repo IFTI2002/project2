@@ -115,8 +115,8 @@ def create(request):
             bid=request.POST["starting_bid"],
             description=request.POST["description"], 
             image=request.POST["image"],
-            creator=request.user.id,
-            bidder=request.user.id,
+            creator=request.user.username,
+            bidder=request.user.username,
             categories=Categories.objects.get(category=request.POST["category"])
             )
             
