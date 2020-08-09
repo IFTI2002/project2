@@ -23,7 +23,7 @@ def listing(request, list_id):
         Listings.objects.filter(pk=list_id).update(bid=request.POST["place_bid"]) # UPDATEDS THE CURRENT HIGHEST BID
         Listings.objects.filter(pk=list_id).update(bidder=request.POST["user_id"]) # UPDATES THE CURRENT HIGHEST BIDDER/USER
 
-        HttpResponseRedirect(reverse("listing", args=(list_id,))) # REDIRECT TO LISTINGS WITH ARGS LISTING ID
+        return HttpResponseRedirect(reverse("listing", args=(list_id,))) # REDIRECT TO LISTINGS WITH ARGS LISTING ID
 
     lists = Listings.objects.get(id=list_id)
     
@@ -34,6 +34,17 @@ def listing(request, list_id):
         "min": lists.bid + 1, # CURRENT BID AMOUNT PLUS 1 FOR ERROR CHECKING
         "watchlist": Watchlist.objects.filter(watchlist=list_id), 
     })
+
+# COMMENTS
+def comment(request, list_id):
+
+    if request.method == "POST":
+
+        comment = Listings.objects.get(id=list_id)
+        comment.comment = request.POST["comment"]
+        comment.save()
+
+        return HttpResponseRedirect(reverse("listing", args=(list_id,))) # REDIRECT TO LISTINGS WITH ARGS LISTING ID
 
 # CATEGORIES
 def categories(request):
@@ -52,13 +63,10 @@ def category(request, category_id):
 # CLOSE LISTING PAGE
 def close(request):
 
-    if request.method == "POST":  # IF METHOD IS POST
+    close = Listings.objects.filter(id=request.POST["listings_id"]) #FILTER IF EQUAL TO ID LISTING
+    close.delete() # DELETE LISTING
 
-        close = Listings.objects.filter(id=request.POST["listings_id"]) #FILTER IF EQUAL TO ID LISTING
-
-        close.delete() # DELETE LISTING
-
-        return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("index"))
 
 # REMOVE WATCHLIST
 def remove(request):

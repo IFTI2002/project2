@@ -5,29 +5,35 @@
 {% endblock %}
 
 {% block body %}
+<!-- TITLE -->
 <div class="list-text">
     <h2>
-        <b>{{ listings.title }}</b> <!-- Title -->
+        <b>{{ listings.title }}</b> 
     </h2>
+    <hr>
 </div>
+<!-- IMAGE -->
 <div class="container-fluid list">
     <div>
         <div class="list-image">
-            <img class="image-list" src="{{ listings.image }}"> <!-- Image -->
+            <img class="image-list" src="{{ listings.image }}"> 
         </div>
     </div>
 </div>
+<!-- DESCRIPTION -->
 <div class="list-info">
     <div>
-        <h5>{{ listings.description }}</h5> <!-- Description -->
+        <h5>{{ listings.description }}</h5> 
     </div>
     <hr>
+    <!-- CURRENT BID -->
     <div>
         <h4 class="listing-text">
-            <b>Current Bid: $ {{ listings.bid }}</b> <!-- Current Bid -->
+            <b>Current Bid: $ {{ listings.bid }}</b> 
         </h4>
     </div>
-    <form action="{% url 'listing' listings.id %}" method="POST">  <!-- Update Bid -->
+    <!-- UPDATE BID -->
+    <form action="{% url 'listing' listings.id %}" method="POST">  
         {% csrf_token %}
         <div class="row">
             <div class="form-group col-12">
@@ -38,16 +44,42 @@
         <input class="btn btn-primary" type="submit" value="Place Bid">
     </form>
     <hr>
-    <div>
-        <h2> Details </h2> <!-- Details -->
-        <li> Listed by: {{ users.username }} </li>
-        <li> Created on: {{ listings.time }} </li>
-        <li> Current Bidder: {{ bidder.username }} </li>
-    </div>
+        <!-- COMMENTS -->
+        <div> 
+            <h4 class="listing-text">
+                <b>Comments</b>  
+            </h4>
+            
+            {% for comments in listings.comment%}
+                <hr>
+                 <div class="form-group col-12">
+                    {{ comments }}
+                </div>
+            {% endfor %}
+            
+            <hr>
+            <form action="{% url 'comment' listings.id %}" method="POST"> 
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-12">
+                        <input class="place-bid" type="text" name="comment" placeholder="Add comment">
+                    </div>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Submit Comment">
+            </form>
+        </div>
+    <hr>
+        <!-- DETAILS -->
+        <div>
+            <h2> Details </h2> 
+            <li> Listed by: {{ users.username }} </li>
+            <li> Created on: {{ listings.time }} </li>
+            <li> Current Bidder: {{ bidder.username }} </li>
+        </div>
     <hr>
 
-    {% if users.username == user.username %} <!-- Button appears if the current users is the one who posted the listing -->
-
+    <!-- BUTTON APPEARS IF THE CURRRENT USER IS THE ONE WHO POSTED THE LISTING-->
+    {% if users.username == user.username %} 
         <form action="{% url 'close' %}" method="POST"> 
             {% csrf_token %}
             <input hidden type="number" name="listings_id" value="{{ listings.id }}">
@@ -58,7 +90,8 @@
 
         {% for watch in watchlist %}
 
-            {% if listings.id == watch.watchlist %} <!-- if this listings has same listings on users watchlist -->
+            <!-- IF LISTING HAS THE SAME LISTING IN WATCHLIST -->
+            {% if listings.id == watch.watchlist %} 
                 
                 <form action="{% url 'remove' %}" method="POST"> 
                 {% csrf_token %}
@@ -68,7 +101,7 @@
 
             {% endif %}
 
-        {% empty %}
+        {% empty %} <!--ELSE-->
 
             <form action="{% url 'watchlist' %}" method="POST"> 
             {% csrf_token %}

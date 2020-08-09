@@ -11,6 +11,11 @@ body {
     margin: 20px 0;
 }
 
+.font-size {
+    font-size: large;
+    color: black;
+}
+
 .place-bid {
     width: 100%;
     border-style: solid;

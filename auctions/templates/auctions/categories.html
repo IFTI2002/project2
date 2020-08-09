@@ -8,7 +8,9 @@
     <h2>All Categories</h2>
     <hr>
     {% for category in categories %} <!--LOOP ALL CATEGORIES-->
-        <li><a href="{% url 'category' category.id %}">{{ category }}</a></li>
+     
+          <h4><a class="fontsize" href="{% url 'category' category.id %}">{{ category }}</a></h4>
+     
     {% endfor %}
     <hr>
 {% endblock %}
