@@ -43,7 +43,7 @@ def comment(request, list_id):
 
         comment = Comment(
             comment=request.POST["comment"],
-            user=request.user.id,
+            user=request.user,
             listing=list_id
         )
 

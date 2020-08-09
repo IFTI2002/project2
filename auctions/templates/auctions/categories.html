@@ -5,12 +5,20 @@
 {% endblock %}
 
 {% block body %}
-    <h2>All Categories</h2>
+    <div class="background1 padding">
+        <h2>All Categories</h2>
+    </div>
     <hr>
+    <div class="background padding">
     {% for category in categories %} <!--LOOP ALL CATEGORIES-->
-     
-          <h4><a class="fontsize" href="{% url 'category' category.id %}">{{ category }}</a></h4>
-     
+    
+        <h4>
+            <a class="fontsize" href="{% url 'category' category.id %}">{{ category }}</a>
+        </h4>
+        <hr>
+
     {% endfor %}
+    </div>
     <hr>
+
 {% endblock %}

@@ -5,8 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Watchlist</h2>
+    <div class="background1 padding">
+        <h2>Watchlist</h2>
+    </div>
     <hr>
+    <div class="background padding">
     {% for watch in watchlist %} <!-- LOOP DATA ON WATCHLIST -->
 
         {% for lists in listings %}
@@ -46,5 +49,6 @@
         <h3>You haven't added any list<h3>
 
     {% endfor %}
+    </div>
     <hr>
 {% endblock %}

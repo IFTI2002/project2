@@ -11,6 +11,22 @@ body {
     margin: 20px 0;
 }
 
+.background {
+    background-color: rgb(225, 225, 225);
+}
+
+.background1 {
+    background-color:  rgb(210, 210, 210);
+}
+
+.background0 {
+    background-color:  rgb(240, 240, 240);
+}
+
+.padding {
+    padding: 15px;
+}
+
 .font-size {
     font-size: large;
     color: black;
@@ -54,6 +70,7 @@ body {
     border-color: lightgray;
     height: 400px;
     margin-bottom: 20px;
+    background-color: rgb(220, 220, 220);
 }
 
 .listing1 {
@@ -62,6 +79,7 @@ body {
     border-color: lightgray;
     height: 400px;
     margin-bottom: 20px;
+    background-color: rgb(220, 220, 220);
 }
 
 .listing-info {

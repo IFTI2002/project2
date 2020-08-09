@@ -12,8 +12,8 @@ class Categories(models.Model):
 
 class Comment(models.Model):
     comment = models.CharField(max_length=256, null=True, blank=True) # COMMENT
-    user = models.IntegerField(default=0)
-    listing = models.IntegerField(default=0)
+    user = models.CharField(max_length=32)
+    listing = models.IntegerField()
 
     def __str__(self):
         return f"id #{self.id} | user #{self.user} | listing #{self.listing}"

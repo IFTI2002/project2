@@ -6,14 +6,14 @@
 
 {% block body %}
 <!-- TITLE -->
-<div class="list-text">
+<div class="list-text padding background1">
     <h2>
         <b>{{ listings.title }}</b> 
     </h2>
-    <hr>
 </div>
+<hr>
 <!-- IMAGE -->
-<div class="container-fluid list">
+<div class="container-fluid list background">
     <div>
         <div class="list-image">
             <img class="image-list" src="{{ listings.image }}"> 
@@ -21,8 +21,12 @@
     </div>
 </div>
 <!-- DESCRIPTION -->
-<div class="list-info">
+<hr>
+<div class="list-info background0 padding">
     <div>
+        <h4 class="listing-text">
+            <b>Description:</b> 
+        </h4>
         <h5>{{ listings.description }}</h5> 
     </div>
     <hr>
@@ -49,14 +53,23 @@
             <h4 class="listing-text">
                 <b>Comments</b>  
             </h4>
-            
-            {% for comment in comments %}
-                <hr>
-                <div class="form-group col-9">
-                    {{ comment.comment }}
-                </div>
-            {% endfor %}
-            
+            <div class="container row">
+                {% for comment in comments %}
+                    <div class="form-group col-2">
+                        <h6 class="listing-date">
+                            by {{ comment.user }}
+                        </h6>
+                        <h6 class="listing-date">
+                            {{ listings.time }}
+                        </h6>
+                    </div>
+
+                    <div class="form-group col-10">
+                        {{ comment.comment }}
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
             <hr>
             <form action="{% url 'comment' listings.id %}" method="POST"> 
                 {% csrf_token %}
@@ -71,7 +84,9 @@
     <hr>
         <!-- DETAILS -->
         <div>
-            <h2> Details </h2> 
+            <h4 class="listing-text">
+                <b>Details</b>  
+            </h4>
             <li> Listed by: {{ users.username }} </li>
             <li> Created on: {{ listings.time }} </li>
             <li> Current Bidder: {{ bidder.username }} </li>
