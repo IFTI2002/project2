@@ -94,7 +94,7 @@
     <hr>
 
     <!-- BUTTON APPEARS IF THE CURRRENT USER IS THE ONE WHO POSTED THE LISTING-->
-    {% if users.username == user.username %} 
+    {% if listings.creator == user.username %} 
         <form action="{% url 'close' %}" method="POST"> 
             {% csrf_token %}
             <input hidden type="number" name="listings_id" value="{{ listings.id }}">

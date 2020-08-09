@@ -26,7 +26,6 @@ def listing(request, list_id):
         return HttpResponseRedirect(reverse("listing", args=(list_id,))) # REDIRECT TO LISTINGS WITH ARGS LISTING ID
 
     lists = Listings.objects.get(id=list_id, close=False)
-    
     return render(request, "auctions/listing.html", {
         "listings": lists,
         "min": lists.bid + 1, # CURRENT BID AMOUNT PLUS 1 FOR ERROR CHECKING
@@ -58,7 +57,7 @@ def categories(request):
 
 # CATTEGORY
 def category(request, category_id):
-    category = Listings.objects.filter(categories=category_id)
+    category = Listings.objects.filter(categories=category_id, close=False)
     return render(request, "auctions/category.html", {
         "categories": category # RETURNS SPECIFIC CATEGORY
     })
