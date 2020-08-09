@@ -7,27 +7,27 @@
 {% block body %}
 <div class="list-text">
     <h2>
-        <b>{{ listings.title }}</b>
+        <b>{{ listings.title }}</b> <!-- Title -->
     </h2>
 </div>
 <div class="container-fluid list">
     <div>
         <div class="list-image">
-            <img class="image-list" src="{{ listings.image }}">
+            <img class="image-list" src="{{ listings.image }}"> <!-- Image -->
         </div>
     </div>
 </div>
 <div class="list-info">
     <div>
-        <h5>{{ listings.description }}</h5>
+        <h5>{{ listings.description }}</h5> <!-- Description -->
     </div>
     <hr>
     <div>
         <h4 class="listing-text">
-            <b>Current Bid: $ {{ listings.bid }}</b>
+            <b>Current Bid: $ {{ listings.bid }}</b> <!-- Current Bid -->
         </h4>
     </div>
-    <form action="{% url 'listing' listings.id %}" method="POST"> 
+    <form action="{% url 'listing' listings.id %}" method="POST">  <!-- Update Bid -->
         {% csrf_token %}
         <div class="row">
             <div class="form-group col-12">
@@ -39,25 +39,47 @@
     </form>
     <hr>
     <div>
-        <h2> Details </h2>
+        <h2> Details </h2> <!-- Details -->
         <li> Listed by: {{ users.username }} </li>
         <li> Created on: {{ listings.time }} </li>
         <li> Current Bidder: {{ bidder.username }} </li>
     </div>
     <hr>
-    {% if users.username == user.username %}
+
+    {% if users.username == user.username %} <!-- Button appears if the current users is the one who posted the listing -->
+
         <form action="{% url 'close' %}" method="POST"> 
             {% csrf_token %}
             <input hidden type="number" name="listings_id" value="{{ listings.id }}">
             <input class="btn btn-primary" type="submit" value="Close Listing">
         </form>
+
     {% else %}
-        <form action="{% url 'watchlist' %}" method="POST"> 
+
+        {% for watch in watchlist %}
+
+            {% if listings.id == watch.watchlist %} <!-- if this listings has same listings on users watchlist -->
+                
+                <form action="{% url 'remove' %}" method="POST"> 
+                {% csrf_token %}
+                    <input hidden type="number" name="remove_id" value="{{ listings.id }}">
+                    <input class="btn btn-primary" type="submit" value="Remove Watchlist">
+                </form>
+
+            {% endif %}
+
+        {% empty %}
+
+            <form action="{% url 'watchlist' %}" method="POST"> 
             {% csrf_token %}
-            <input hidden type="number" name="listings_id" value="{{ listings.id }}">
-            <input class="btn btn-primary" type="submit" value="Watchlist">
-        </form>
+                <input hidden type="number" name="add_id" value="{{ listings.id }}">
+                <input class="btn btn-primary" type="submit" value="Add to Watchlist">
+            </form>
+
+        {% endfor %}
+
     {% endif %}
-    
 </div>
 {% endblock %}
+
+

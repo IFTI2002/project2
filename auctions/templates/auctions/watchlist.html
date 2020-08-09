@@ -39,11 +39,12 @@
                 </div>
             {% endif %}
 
-        {% empty %}
+        {% endfor %}
+
+    {% empty %}
 
         <h3>You haven't added any list<h3>
 
-        {% endfor %}
     {% endfor %}
     <hr>
 {% endblock %}

@@ -29,7 +29,8 @@ def listing(request, list_id):
         "listings": lists,
         "users": User.objects.get(id=lists.creator),
         "bidder": User.objects.get(id=lists.bidder),
-        "min": lists.bid + 1
+        "min": lists.bid + 1,
+        "watchlist": Watchlist.objects.filter(watchlist=list_id),
     })
 
 def categories(request):
@@ -54,14 +55,20 @@ def close(request):
 
         return HttpResponseRedirect(reverse("index"))
 
+def remove(request):
+
+    remove = Watchlist.objects.filter(user=request.user.id, watchlist=request.POST["remove_id"])
+    remove.delete()
+
+    return HttpResponseRedirect(reverse("watchlist"))
 
 @login_required(login_url='login')
 def watchlist(request):
 
     if request.method == "POST":
-        
+            
         watchlist = Watchlist(
-            watchlist = request.POST["listings_id"],
+            watchlist = request.POST["add_id"],
             user = request.user.id
         )
 
