@@ -50,10 +50,10 @@
                 <b>Comments</b>  
             </h4>
             
-            {% for comments in listings.comment%}
+            {% for comment in comments %}
                 <hr>
-                 <div class="form-group col-12">
-                    {{ comments }}
+                <div class="form-group col-9">
+                    {{ comment.comment }}
                 </div>
             {% endfor %}
             

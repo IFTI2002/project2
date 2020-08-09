@@ -10,6 +10,14 @@ class Categories(models.Model):
     def __str__(self):
         return self.category
 
+class Comment(models.Model):
+    comment = models.CharField(max_length=256, null=True, blank=True) # COMMENT
+    user = models.IntegerField(default=0)
+    listing = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"id #{self.id} | user #{self.user} | listing #{self.listing}"
+
 class Listings(models.Model):
     title = models.CharField(max_length=32) # TITLE
     description = models.CharField(max_length=256, null=True) # DESCRIPTION
@@ -17,16 +25,15 @@ class Listings(models.Model):
     image = models.URLField(max_length=2048, null=True) # IMAGE URL 
     bid = models.IntegerField() # CURRENT BID
     categories = models.ForeignKey(Categories, on_delete=models.CASCADE, related_name="type") # CATEGORIES
-    comment = models.CharField(max_length=256, null=True, blank=True) 
     creator = models.IntegerField() # CREATOR OF THE LISTING
     bidder = models.IntegerField() # CURRENT HIGHEST BIDDER
 
     def __str__(self):
-        return f"{self.id} - {self.title}: ${self.bid} ({self.categories}) {self.time}"
+        return f"{self.id} - {self.title}: ${self.bid} ({self.categories}) {self.time} {self.comment}"
 
 class Watchlist(models.Model):
     watchlist = models.IntegerField() # LISTING ID
-    user = models.IntegerField(default=0) # USER ID
+    user = models.IntegerField() # USER ID
 
     def __int__(self):
         return self.watchlist

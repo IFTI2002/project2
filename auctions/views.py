@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, Listings, Categories, Watchlist
+from .models import User, Listings, Categories, Watchlist, Comment
 
 # INDEX
 def index(request):
@@ -33,6 +33,7 @@ def listing(request, list_id):
         "bidder": User.objects.get(id=lists.bidder), # RETURN THE CURRENT HIGHEST BIDDER/USER
         "min": lists.bid + 1, # CURRENT BID AMOUNT PLUS 1 FOR ERROR CHECKING
         "watchlist": Watchlist.objects.filter(watchlist=list_id), 
+        "comments": Comment.objects.filter(listing=list_id)
     })
 
 # COMMENTS
@@ -40,8 +41,12 @@ def comment(request, list_id):
 
     if request.method == "POST":
 
-        comment = Listings.objects.get(id=list_id)
-        comment.comment = request.POST["comment"]
+        comment = Comment(
+            comment=request.POST["comment"],
+            user=request.user.id,
+            listing=list_id
+        )
+
         comment.save()
 
         return HttpResponseRedirect(reverse("listing", args=(list_id,))) # REDIRECT TO LISTINGS WITH ARGS LISTING ID
