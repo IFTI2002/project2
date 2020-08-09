@@ -15,12 +15,12 @@
             <div class="row center">
                 <div class="form-group col-6">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title">
+                    <input type="text" class="form-control" id="title" name="title" required/>
                 </div>
 
                 <div class="form-group col-6">
                     <label for="category">Category</label>
-                    <select id="category" class="form-control" name="category">
+                    <select id="category" class="form-control" name="category" required/>
                         {% for category in categories %}
                             <option>{{ category }}</option>
                         {% endfor %}
@@ -36,17 +36,16 @@
             <div class="row">
                 <div class="form-group col-12">
                     <label for="image">Image URL</label>
-                    <input type="text" class="form-control" id="image" name="image">
+                    <input type="text" class="form-control" id="image" name="image" required/>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-12">
                     <label for="starting_bid">Starting Bid</label>
-                    <input type="number" id="starting_bid" min="0" max="999999" placeholder="USD" name="starting_bid"> 
+                    <input type="number" id="starting_bid" min="0" max="999999" placeholder="USD" name="starting_bid" required/> 
                 </div>
             </div>
             <hr>
-            <input type="number" hidden name="user_id" value="{{ user.id }}">
             <input class="btn btn-primary" type="submit" value="Submit Listing">
         </form>
     </div>

@@ -25,12 +25,12 @@ class Listings(models.Model):
     image = models.URLField(max_length=2048, null=True) # IMAGE URL 
     bid = models.IntegerField() # CURRENT BID
     categories = models.ForeignKey(Categories, on_delete=models.CASCADE, related_name="type") # CATEGORIES
-    creator = models.IntegerField() # CREATOR OF THE LISTING
-    bidder = models.IntegerField() # CURRENT HIGHEST BIDDER
+    creator = models.CharField(max_length=32) # CREATOR OF THE LISTING
+    bidder = models.CharField(max_length=32) # CURRENT HIGHEST BIDDER
     close = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.id} - {self.title}: ${self.bid} ({self.categories}) {self.time} {self.comment}"
+        return f"{self.id} - {self.title}: ${self.bid} ({self.categories}) {self.time}"
 
 class Watchlist(models.Model):
     watchlist = models.IntegerField() # LISTING ID
