@@ -62,7 +62,7 @@ def watchlist(request):
         
         watchlist = Watchlist(
             watchlist = request.POST["listings_id"],
-            user = request.POST["user_id"]
+            user = request.user.id
         )
 
         watchlist.save()
@@ -70,7 +70,8 @@ def watchlist(request):
         return HttpResponseRedirect(reverse("watchlist"))
 
     return render(request, "auctions/watchlist.html", {
-        "watchlist": Watchlist.objects.filter(user=request.user.id)
+        "watchlist": Watchlist.objects.filter(user=request.user.id),
+        "listings": Listings.objects.all()
     })
 
 @login_required(login_url='login')

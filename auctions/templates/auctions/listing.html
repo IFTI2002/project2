@@ -55,7 +55,6 @@
         <form action="{% url 'watchlist' %}" method="POST"> 
             {% csrf_token %}
             <input hidden type="number" name="listings_id" value="{{ listings.id }}">
-            <input hidden type="number" name="user_id" value="{{ user.id }}">
             <input class="btn btn-primary" type="submit" value="Watchlist">
         </form>
     {% endif %}
