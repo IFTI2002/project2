@@ -70,7 +70,7 @@ def watchlist(request):
         return HttpResponseRedirect(reverse("watchlist"))
 
     return render(request, "auctions/watchlist.html", {
-        "watchlist": Watchlist.objects.filter(user=user_id)
+        "watchlist": Watchlist.objects.filter(user=request.user.id)
     })
 
 @login_required(login_url='login')
