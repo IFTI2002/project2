@@ -44,7 +44,15 @@ def category(request, category_id):
     })
 
 def close(request):
-    return render(request, "auctions/close.html")
+
+    if request.method == "POST":
+
+        delete = Listings.objects.filter(id=request.POST["listings_id"])
+
+        delete.delete()
+
+        return HttpResponseRedirect(reverse("index"))
+        
 
 @login_required(login_url='login')
 def watchlist(request):

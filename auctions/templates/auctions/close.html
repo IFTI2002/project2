@@ -7,7 +7,9 @@
 {% block body %}
     <h2>Are you sure you want to close your listing?</h2>
     <form action="{% url 'close' %}" method="POST">
-        <input class="btn btn-primary" type="submit" value="YES">
-        <input class="btn btn-primary" type="submit" value="NO">
+    {% csrf_token %}
+        <input hidden type="submit" value="{{ user.id }}" name="bool">
+        <input class="btn btn-primary" type="submit" value="YES" name="bool">
+        <input class="btn btn-primary" type="submit" value="NO" name="bool">
     </form>
 {% endblock %}

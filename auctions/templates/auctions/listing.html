@@ -48,6 +48,7 @@
     {% if users.username == user.username %}
         <form action="{% url 'close' %}" method="POST"> 
             {% csrf_token %}
+            <input hidden type="number" name="listings_id" value="{{ listings.id }}">
             <input class="btn btn-primary" type="submit" value="Close Listing">
         </form>
     {% else %}
